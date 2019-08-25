@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterapp/screens/register.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -27,7 +28,11 @@ class _HomeState extends State<Home> {
     return Expanded(
         child: OutlineButton(
       child: Text('Sign Up',style:TextStyle(color:Colors.blue[400])),
-      onPressed: () {},
+      onPressed: () {
+        //print('You click signup');
+        MaterialPageRoute materialPageRoute=MaterialPageRoute(builder: (BuildContext context)=>Register());
+        Navigator.of(context).push(materialPageRoute);
+      },
     ));
   }
 
