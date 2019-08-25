@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "719095110129",
+    "firebase_url": "https://pogemonkit.firebaseio.com",
+    "project_id": "pogemonkit",
+    "storage_bucket": "pogemonkit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:719095110129:android:a7222fa69899db5e",
+        "android_client_info": {
+          "package_name": "org.app.pogemon.flutterapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "719095110129-du9f2qab89kgaihi6jnsoop83ums94lj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlUnMn1yPTlrhfzEu8VJlzYgI7vn-T-eM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "719095110129-du9f2qab89kgaihi6jnsoop83ums94lj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

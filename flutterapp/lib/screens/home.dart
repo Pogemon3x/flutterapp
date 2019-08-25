@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterapp/screens/myservice.dart';
 import 'package:flutterapp/screens/register.dart';
 
 class Home extends StatefulWidget {
@@ -8,17 +10,38 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   // Explicit
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   // Method
 
-  Widget mySizebox(){
-    return SizedBox(width: 5.0,height: 10.0,);
+  @override
+  void initState() {
+    super.initState();
+    checkStatus();
+  }
+
+  Future<void> checkStatus() async {
+    FirebaseUser firebaseUser = await firebaseAuth.currentUser();
+    if (firebaseUser = null) {
+      MaterialPageRoute materialPageRoute =
+          MaterialPageRoute(builder: (BuildContext context) => MyService());
+      Navigator.of(context).pushAndRemoveUntil(
+          materialPageRoute, (Route<dynamic> route) => false);
+    }
+  }
+
+  Widget mySizebox() {
+    return SizedBox(
+      width: 5.0,
+      height: 10.0,
+    );
   }
 
   Widget signInButton() {
     return Expanded(
-      child: RaisedButton(color:Colors.blue[400],
-        child: Text('Sign In',style:TextStyle(color: Colors.white)),
+      child: RaisedButton(
+        color: Colors.blue[400],
+        child: Text('Sign In', style: TextStyle(color: Colors.white)),
         onPressed: () {},
       ),
     );
@@ -27,10 +50,11 @@ class _HomeState extends State<Home> {
   Widget signUpButton() {
     return Expanded(
         child: OutlineButton(
-      child: Text('Sign Up',style:TextStyle(color:Colors.blue[400])),
+      child: Text('Sign Up', style: TextStyle(color: Colors.blue[400])),
       onPressed: () {
         //print('You click signup');
-        MaterialPageRoute materialPageRoute=MaterialPageRoute(builder: (BuildContext context)=>Register());
+        MaterialPageRoute materialPageRoute =
+            MaterialPageRoute(builder: (BuildContext context) => Register());
         Navigator.of(context).push(materialPageRoute);
       },
     ));
@@ -67,7 +91,12 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(decoration: BoxDecoration(gradient: RadialGradient(colors: [Colors.white,Colors.blue],radius: 1.0,)),
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: RadialGradient(
+          colors: [Colors.white, Colors.blue],
+          radius: 1.0,
+        )),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
