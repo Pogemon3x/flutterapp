@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterapp/screens/home.dart';
+import 'package:flutterapp/screens/list_product.dart';
+import 'package:flutterapp/screens/show_map.dart';
 
 class MyService extends StatefulWidget {
   @override
@@ -10,6 +13,9 @@ class _MyServiceState extends State<MyService> {
   // Explicite
   String loginString = '';
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  double myIconSize = 36.0;
+  double h2 = 18.0;
+  Widget myWidget = ListProduct();
 
   // Method
 
@@ -17,6 +23,68 @@ class _MyServiceState extends State<MyService> {
   void initState() {
     super.initState();
     findDisplayName();
+  }
+
+  Widget listProductMenu() {
+    return ListTile(
+      leading: Icon(
+        Icons.home,
+        size: myIconSize,
+      ),
+      title: Text(
+        'List Product',
+        style: TextStyle(fontSize: h2),
+      ),
+      subtitle: Text('Show list all Product'),
+      onTap: () {
+        setState(() {
+          myWidget = ListProduct();
+          Navigator.of(context).pop();
+        });
+      },
+    );
+  }
+
+  Widget mapMenu() {
+    return ListTile(
+      leading: Icon(
+        Icons.map,
+        size: myIconSize,
+      ),
+      title: Text(
+        'Show MAP',
+        style: TextStyle(fontSize: h2),
+      ),
+      subtitle: Text('Show Current Location Map'),
+      onTap: () {
+        setState(() {
+          myWidget = ShowMap();
+          Navigator.of(context).pop();
+        });
+      },
+    );
+  }
+
+  Widget signOutMenu() {
+    return ListTile(
+      leading: Icon(
+        Icons.cached,
+        size: myIconSize,
+      ),
+      title: Text('Sign Out'),
+      onTap: () {
+        processSignOut();
+      },
+    );
+  }
+
+  Future<void> processSignOut() async {
+    await firebaseAuth.signOut().then((reponse) {
+      MaterialPageRoute materialPageRoute =
+          MaterialPageRoute(builder: (BuildContext context) => Home());
+      Navigator.of(context).pushAndRemoveUntil(
+          materialPageRoute, (Route<dynamic> route) => false);
+    });
   }
 
   Future<void> findDisplayName() async {
@@ -65,7 +133,12 @@ class _MyServiceState extends State<MyService> {
   Widget myDrawerMenu() {
     return Drawer(
       child: ListView(
-        children: <Widget>[myHeadDrawer()],
+        children: <Widget>[
+          myHeadDrawer(),
+          listProductMenu(),
+          mapMenu(),
+          signOutMenu()
+        ],
       ),
     );
   }
